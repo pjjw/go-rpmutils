@@ -78,6 +78,14 @@ func (rpm *Rpm) PayloadReader() (*cpio.Reader, error) {
 	return cpio.NewReader(pld), nil
 }
 
+func (rpm *Rpm) RawUncompressedRPMPayloadReader() (io.Reader, error) {
+	pld, err := uncompressRpmPayloadReader(rpm.f, rpm.Header)
+	if err != nil {
+		return nil, err
+	}
+	return pld, nil
+}
+
 // PayloadReaderExtended accesses payload file contents sequentially
 func (rpm *Rpm) PayloadReaderExtended() (PayloadReader, error) {
 	pld, err := uncompressRpmPayloadReader(rpm.f, rpm.Header)
