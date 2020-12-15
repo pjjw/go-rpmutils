@@ -31,7 +31,7 @@ var ErrStrippedHeader = errors.New("invalid cpio header: rpm-style stripped cpio
 // CpioEntry points to a single file within a cpio stream
 type CpioEntry struct {
 	Header  *Cpio_newc_header
-	payload *file_stream
+	Payload *file_stream
 }
 
 // CpioStream reads file metadata and contents from a cpio archive
@@ -111,7 +111,7 @@ func (cs *CpioStream) ReadNextEntry() (*CpioEntry, error) {
 	hdr.filename = filename
 	entry := CpioEntry{
 		Header:  hdr,
-		payload: payload,
+		Payload: payload,
 	}
 
 	return &entry, nil
@@ -130,7 +130,7 @@ func (cs *CpioStream) readStrippedEntry(hdr *Cpio_newc_header) (*CpioEntry, erro
 	if err != nil {
 		return nil, err
 	}
-	return &CpioEntry{Header: hdr, payload: payload}, nil
+	return &CpioEntry{Header: hdr, Payload: payload}, nil
 }
 
 func (cr *countingReader) Read(p []byte) (n int, err error) {

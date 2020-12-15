@@ -85,7 +85,7 @@ func Tar(rs io.Reader, tarfile *tar.Writer) error {
 			return fmt.Errorf("could not write tar header for %v: %v", tarHeader.Name, err)
 		}
 		if payload != nil {
-			written, err := io.Copy(tarfile, entry.payload)
+			written, err := io.Copy(tarfile, entry.Payload)
 			if err != nil {
 				return fmt.Errorf("could not write body for %v: %v", tarHeader.Name, err)
 			}

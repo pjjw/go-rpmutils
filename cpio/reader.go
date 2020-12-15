@@ -58,5 +58,5 @@ func (r *Reader) Next() (*Cpio_newc_header, error) {
 //
 // Returns io.EOF when the current file has been read in its entirety.
 func (r *Reader) Read(p []byte) (n int, err error) {
-	return r.cur.payload.Read(p)
+	return r.cur.Payload.Read(p)
 }
